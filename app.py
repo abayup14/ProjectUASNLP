@@ -27,17 +27,36 @@ def get_sentiment():
     model2 = load_model("best_model2.keras")
 
     y1_pred = model1.predict(comment_padded)
-    y1_pred = np.argmax(y1_pred, axis=1)
-    print(y1_pred)
+    y1_pred_class = np.argmax(y1_pred, axis=1)[0]
+    conf1 = np.max(y1_pred)
+    sent_class = {
+        0: "negative",
+        1: "neutral",
+        2: "positive"
+    }
+    # print(y1_pred_class)
+    sentiment = sent_class[y1_pred_class]
 
     y2_pred = model2.predict(comment_padded)
-    y2_pred = np.argmax(y2_pred, axis=1)
-    print(y2_pred)
+    y2_pred_class = np.argmax(y2_pred, axis=1)[0]
+    conf2 = np.max(y2_pred)
+    emot_class = {
+        0: "anger",
+        1: "anticipation",
+        2: "optimism",
+        3: "disgust",
+        4: "joy",
+        5: "fear",
+        6: "sadness",
+        7: "surprise"
+    }
+    # print(y2_pred)
+    emotion = emot_class[y2_pred_class]
 
-    return jsonify({"sentiment": "neutral",
-                    "sentiment_conf": 0.6,
-                    "emotion": "happy",
-                    "emotion_conf": 0.8
+    return jsonify({"sentiment": sentiment,
+                    "sentiment_conf": float(conf1),
+                    "emotion": emotion,
+                    "emotion_conf": float(conf2)
                     })
 
 
