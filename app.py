@@ -13,7 +13,7 @@ app.config['DEBUG'] = True
 nltk.download('stopwords')
 nltk.download('wordnet')
 from nltk.corpus import stopwords
-stop_words = set(stopwords.words('english'))
+stopwords = set(stopwords.words('english'))
 
 def remove_tags(text):
     text = re.sub('@[a-zA-Z0-9_]*', '', text)
@@ -25,7 +25,7 @@ def remove_tags(text):
 
 def preprocess(text):
     text = remove_tags(text)
-    text = ' '.join([word for word in text.split() if word not in stop_words])
+    text = ' '.join([word for word in text.split() if word not in stopwords])
     return text
 
 @app.route('/')
