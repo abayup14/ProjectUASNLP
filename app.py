@@ -40,13 +40,10 @@ def get_sentiment():
 
     comment = request.json.get("comment")
     print(comment)
-
     comment_preprocess = preprocess(comment)
     print(comment_preprocess)
-
     comment_sequences = tokenizer.texts_to_sequences([comment_preprocess])
     print(comment_sequences)
-
     comment_padded = pad_sequences(comment_sequences, maxlen = 300, padding = 'post')
     print(comment_padded)
 
