@@ -23,7 +23,7 @@
                 <div class=" bg-warning-subtle py-1">
                     <h6 class="text-body-emphasis" id="cleaned_comment">Cleaned Comment: </h6>
                 </div>
-               <div class=" bg-primary-subtle py-1">
+                <div class=" bg-primary-subtle py-1">
                     <h6 class="text-body-emphasis" id="out-sentiment">Sentiment: </h6>
                 </div>
                 <div class=" bg-success-subtle py-1">
@@ -33,28 +33,27 @@
         </div>
     </div>
     <script>
-          async function sendSentiment() {
-            const comment = document.getElementById("txt-comment").value;
-            const outputDiv = document.getElementById("result");
-            const out_sentiment = document.getElementById("out-sentiment");
-            const out_emotion = document.getElementById("out-emotion");
-            const cleaned_comment = document.getElementById("cleaned_comment")
+        async function sendSentiment() {
+        const comment = document.getElementById("txt-comment").value;
+        const outputDiv = document.getElementById("result");
+        const out_sentiment = document.getElementById("out-sentiment");
+        const out_emotion = document.getElementById("out-emotion");
+        const cleaned_comment = document.getElementById("cleaned_comment")
 
-            const response = await fetch('/get_sentiment', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ comment: comment})
-            });
-            const data = await response.json();
-            console.log(data)
-            cleaned_comment.innerText = `Cleaned Comment: ${data.cleaned_comment}`;
-            out_sentiment.innerText = `Sentiment: ${data.sentiment} (${data.sentiment_conf*100}%)`;
-            out_emotion.innerText = `Emotion: ${data.emotion} (${data.emotion_conf*100}%)`;
-            outputDiv.style.display = "block";
-          }
-
+        const response = await fetch('/get_sentiment', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ comment: comment})
+        });
+        const data = await response.json();
+        console.log(data)
+        cleaned_comment.innerText = `Cleaned Comment: ${data.cleaned_comment}`;
+        out_sentiment.innerText = `Sentiment: ${data.sentiment} (${data.sentiment_conf*100}%)`;
+        out_emotion.innerText = `Emotion: ${data.emotion} (${data.emotion_conf*100}%)`;
+        outputDiv.style.display = "block";
+        }
     </script>
 </body>
 </html>
