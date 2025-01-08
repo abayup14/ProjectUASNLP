@@ -18,7 +18,7 @@ stopwords = set(stopwords.words('english'))
 def remove_tags(text):
     text = re.sub('@[a-zA-Z0-9_]*', '', text)
     text = re.sub('#[a-zA-Z0-9_]*', '', text)
-    text = re.sub('https?://\S+|www\.\S+', '', text)
+    text = re.sub(r'https?://\S+|www\.\S+', '', text)
     text = re.sub(r'[^a-zA-Z\s]', '', text)
     text = text.lower()
     return text
